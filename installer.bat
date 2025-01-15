@@ -9,8 +9,8 @@ if not exist C:\Users\%username%\AppData\Roaming\nfetch (
 )
 curl -L nfetch.pages.dev/payload.bat > %TEMP%\payload.bat
 type %TEMP%\payload.bat | more /p > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
-echo "[nfetch]" > C:\Users\%username%\AppData\Roaming\nfetch\config.ini
-echo "logo=default" >> C:\Users\%username%\AppData\Roaming\nfetch\config.ini
+curl -L nfetch.pages.dev/config.ini > %TEMP%\config.ini
+type %TEMP%\config.ini | more /p > C:\Users\%username%\AppData\Roaming\nfetch\config.ini
 mkdir C:\Users\%username%\AppData\Roaming\nfetch\themes\sample
 curl -L nfetch.pages.dev/sample.nfetch > %TEMP%\sample.nfetch
 type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\sample.nfetch
