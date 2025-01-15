@@ -107,7 +107,7 @@ echo       .MMMMMMMMMMMMMMM  :MMMMMMMMMMMMMMP      Shell: %ShellInfo%
 echo       MMMMMMMMMMMMMMM  qMMMMMMMMMMMMMMM'      Resolution: %Resolution%
 echo      .MMMMMMMMMMMMMM  :MMMMMMMMMMMMMMMP       CPU: %CPUInfo%
 echo     ' ..-nnmmn-.. '' :MMMMMMMMMMMMMMMP        GPU: %GPUInfo%
-echo    .mMMMMMMMMMMMMML  '"4MMMMMMMMMMMM"         RAM: %RAMInfo%
+echo    .mMMMMMMMMMMMMML  '"4MMMMMMMMMMMM"         RAM: %RAMInfo% KB
 echo    MMMMMMMMMMMMMMM' ^|Mm..__     __.m          Free Memory: %FreeMemory% KB
 echo   .MMMMMMMMMMMMMM; JMMMMMMMMMMMMMMMM          Total Memory: %TotalMemory% KB
 echo   MMMMMMMMMMMMMM' .MMMMMMMMMMMMMMMM
@@ -143,7 +143,7 @@ call :echoColorN 36 "GPU: "
 call :echoColor 37 "%GPUInfo%""
 call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     "
 call :echoColorN 36 "RAM: " 
-call :echoColor 37 "%RAMInfo%"
+call :echoColor 37 "%RAMInfo% KB"
 call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     " 
 call :echoColorN 36 "Free Memory: " 
 call :echoColor 37 "%FreeMemory% KB"
@@ -187,7 +187,7 @@ echo  ,cclllllllllll  lllllllllllllllllll    Shell: %ShellInfo%
 echo  llllllllllllll  lllllllllllllllllll    Resolution: %Resolution%
 echo  llllllllllllll  lllllllllllllllllll    CPU: %CPUInfo%
 echo  llllllllllllll  lllllllllllllllllll    GPU: %GPUInfo%
-echo  llllllllllllll  lllllllllllllllllll    RAM: %RAMInfo%
+echo  llllllllllllll  lllllllllllllllllll    RAM: %RAMInfo% KB
 echo  llllllllllllll  lllllllllllllllllll    Free Memory: %FreeMemory% KB
 echo                                         Total Memory: %TotalMemory% KB
 echo  llllllllllllll  lllllllllllllllllll    
