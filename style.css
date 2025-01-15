@@ -1,0 +1,34 @@
+body {
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,255,1) 100%);
+}
+.white {
+    color: white;
+}
+.installheader {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30pt;
+    filter: url(#crispify);
+    text-shadow: 4px 4px 0px rgba(0,0,0,1);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    /*move it up or something */
+    transform: translateY(-20px);
+    color:white;
+}
+
+.crispy {
+    filter: url(#crispify);
+}
+
+h1 {
+    font-size: 40;
+}
+
+.centerit {
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px; /* Optional: Add space between items */
+}
