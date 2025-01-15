@@ -7,9 +7,12 @@ if not exist C:\Users\%username%\AppData\Roaming\nfetch (
     echo Existing install, assuming update
     set ISUPDATE=1
 )
-curl -L nfetch.pages.dev/payload.bat > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
+curl -L nfetch.pages.dev/payload.bat > %TEMP%\payload.bat
+type %TEMP%\payload.bat | more /p > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
+
 if %ISUPDATE%==0 (
     echo Updating PATH...
-    powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Users\%username%\AppData\Roaming\nfetch', [System.EnvironmentVariableTarget]::User)"
+    :: fuck you setx
+    powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', '%PATH%;C:\Users\%username%\AppData\Roaming\nfetch', [System.EnvironmentVariableTarget]::User)"
 )
 echo Done installing, restart shell to see updated PATH
