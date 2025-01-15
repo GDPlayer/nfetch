@@ -6,7 +6,7 @@ basically a clone of [neofetch](https://github.com/dylanaraps/neofetch) but for 
 
 run installer.bat from the repo
 
-or try it out using `curl -L nfetch.pages.dev | cmd`
+~~or try it out using `curl -L nfetch.pages.dev | cmd`~~ nvm
 
 ## website
 
