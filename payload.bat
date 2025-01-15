@@ -1,4 +1,33 @@
 @echo off
+set nfetch_version=1.1.0
+:: check if update
+FOR /F "tokens=*" %%g IN ('type testver.txt') do (SET nfetch_cur=%%g)
+for /f "tokens=1,2,3 delims=." %%a in ("%nfetch_version%") do (
+    set nfetchMajor=%%a
+    set nfetchMinor=%%b
+    set nfetchBugfix=%%c
+)
+
+for /f "tokens=1,2,3 delims=." %%a in ("%nfetch_cur%") do (
+    set nfetchCurMajor=%%a
+    set nfetchCurMinor=%%b
+    set nfetchCurBugfix=%%c
+)
+
+set updateNOW=0
+if %nfetchCurMajor% gtr %nfetchMajor% (
+    set updateNOW=1
+)
+if %nfetchCurMinor% gtr %nfetchMinor% (
+    set updateNOW=1
+)
+if %nfetchCurBugfix% gtr %nfetchBugfix% (
+    set updateNOW=1
+)
+if %updateNOW%==1 (
+    goto :update
+)
+
 rem nfetch - neofetch alternative without installing anything
 for /f "tokens=2 delims=[]" %%a in ('ver') do set Version=%%a
 for /f "tokens=1,2,3 delims=." %%a in ("%Version%") do (
@@ -42,6 +71,8 @@ for /f "tokens=*" %%I in ('wmic memorychip get capacity ^| findstr /v "Capacity"
 :nextRAM
 for /f "tokens=2 delims==" %%I in ('wmic os get freephysicalmemory /value') do set FreeMemory=%%I
 for /f "tokens=2 delims==" %%I in ('wmic os get totalvisiblememorysize /value') do set TotalMemory=%%I
+set /a FreeMemory=FreeMemory/1048576
+set /a TotalMemory=TotalMemory/1048576
 
 rem debug
 ::set Major=6
@@ -107,9 +138,9 @@ echo       .MMMMMMMMMMMMMMM  :MMMMMMMMMMMMMMP      Shell: %ShellInfo%
 echo       MMMMMMMMMMMMMMM  qMMMMMMMMMMMMMMM'      Resolution: %Resolution%
 echo      .MMMMMMMMMMMMMM  :MMMMMMMMMMMMMMMP       CPU: %CPUInfo%
 echo     ' ..-nnmmn-.. '' :MMMMMMMMMMMMMMMP        GPU: %GPUInfo%
-echo    .mMMMMMMMMMMMMML  '"4MMMMMMMMMMMM"         RAM: %RAMInfo% KB
-echo    MMMMMMMMMMMMMMM' ^|Mm..__     __.m          Free Memory: %FreeMemory% KB
-echo   .MMMMMMMMMMMMMM; JMMMMMMMMMMMMMMMM          Total Memory: %TotalMemory% KB
+echo    .mMMMMMMMMMMMMML  '"4MMMMMMMMMMMM"         Free Memory: %FreeMemory% GB
+echo    MMMMMMMMMMMMMMM' ^|Mm..__     __.m         Total Memory: %TotalMemory% GB
+echo   .MMMMMMMMMMMMMM; JMMMMMMMMMMMMMMMM          
 echo   MMMMMMMMMMMMMM' .MMMMMMMMMMMMMMMM
 echo  .MMMMPMMMMMMMMM  MMMMMMMMMMMMMMMM
 echo "'`         ^^;' .MMMMMMMMMMMMMMMM
@@ -142,14 +173,12 @@ call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     "
 call :echoColorN 36 "GPU: " 
 call :echoColor 37 "%GPUInfo%""
 call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     "
-call :echoColorN 36 "RAM: " 
-call :echoColor 37 "%RAMInfo% KB"
-call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     " 
 call :echoColorN 36 "Free Memory: " 
-call :echoColor 37 "%FreeMemory% KB"
-call :echoColorN 36 "                                          " 
+call :echoColor 37 "%FreeMemory% GB"
+call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     " 
 call :echoColorN 36 "Total Memory: " 
-call :echoColor 37 "%TotalMemory% KB"
+call :echoColor 37 "%TotalMemory% GB"
+call :echoColor 36 "                                          " 
 call :echoColor 36 "  llllllllllllll  lllllllllllllllllll     " 
 call :echoColorN 36 "  llllllllllllll  lllllllllllllllllll     " 
 call :echoColorN 40 "  " 
@@ -187,9 +216,9 @@ echo  ,cclllllllllll  lllllllllllllllllll    Shell: %ShellInfo%
 echo  llllllllllllll  lllllllllllllllllll    Resolution: %Resolution%
 echo  llllllllllllll  lllllllllllllllllll    CPU: %CPUInfo%
 echo  llllllllllllll  lllllllllllllllllll    GPU: %GPUInfo%
-echo  llllllllllllll  lllllllllllllllllll    RAM: %RAMInfo% KB
-echo  llllllllllllll  lllllllllllllllllll    Free Memory: %FreeMemory% KB
-echo                                         Total Memory: %TotalMemory% KB
+echo  llllllllllllll  lllllllllllllllllll    Free Memory: %FreeMemory% GB
+echo  llllllllllllll  lllllllllllllllllll    Total Memory: %TotalMemory% GB
+echo                                         
 echo  llllllllllllll  lllllllllllllllllll    
 echo  llllllllllllll  lllllllllllllllllll 
 echo  llllllllllllll  lllllllllllllllllll 
@@ -200,3 +229,8 @@ echo         `'""*::  :ccllllllllllllllll
 echo                        ````''"*::cll
 echo                                   ``
 exit /b
+
+:update
+echo Updating nfetch to %nfetchCurMajor%.%nfetchCurMinor%.%nfetchCurBugfix%
+curl -L nfetch.pages.dev/payload.bat > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
+C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
