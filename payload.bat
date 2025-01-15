@@ -32,7 +32,7 @@ if %updateNOW%==1 (
 rem nfetch - neofetch alternative without installing anything
 
 :: Set the path to the INI file
-set isDev=0
+set isDev=1
 set "INI_FILE=%USERPROFILE%\AppData\Roaming\nfetch\config.ini"
 set "INI_FILE_DEV=config.ini"
 
