@@ -12,7 +12,8 @@ type %TEMP%\payload.bat | more /p > C:\Users\%username%\AppData\Roaming\nfetch\n
 echo "[nfetch]" > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.ini
 echo "logo=default" >> C:\Users\%username%\AppData\Roaming\nfetch\nfetch.ini
 mkdir C:\Users\%username%\AppData\Roaming\nfetch\themes\sample
-curl -L nfetch.pages.dev/sample.nfetch > C:\Users\%username%\AppData\Roaming\nfetch\themes\sample\sample.nfetch
+curl -L nfetch.pages.dev/sample.nfetch > %TEMP%\sample.nfetch
+type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\sample.nfetch
 
 if %ISUPDATE%==0 (
     echo Updating PATH...
