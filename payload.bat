@@ -1,5 +1,6 @@
 @echo off
-set nfetch_version=1.1.0
+setlocal enabledelayedexpansion
+set nfetch_version=1.2.0
 :: check if update
 FOR /F "tokens=*" %%g IN ('curl -s -L nfetch.pages.dev/latestver.txt') do (SET nfetch_cur=%%g)
 for /f "tokens=1,2,3 delims=." %%a in ("%nfetch_version%") do (
@@ -29,6 +30,43 @@ if %updateNOW%==1 (
 )
 
 rem nfetch - neofetch alternative without installing anything
+
+:: Set the path to the INI file
+set isDev=0
+set "INI_FILE=%USERPROFILE%\AppData\Roaming\nfetch\config.ini"
+set "INI_FILE_DEV=config.ini"
+
+if %isDev%==1 (
+    set "INI_FILE=%INI_FILE_DEV%"
+)
+
+:: Initialize variables for sections
+set "currentSection="
+
+:: Read the INI file line by line
+for /f "tokens=1,* delims==" %%A in ('type "%INI_FILE%"') do (
+    set "line=%%A"
+    
+    :: Ignore empty lines and comments
+    if not "!line!"=="" (
+        if "!line:~0,1!"==";" (
+            :: It's a comment, skip it
+            continue
+        )
+        
+        :: Handle section header
+        if "!line:~0,1!"=="[" (
+            set "currentSection=!line!"
+        ) else (
+            :: Handle key-value pairs
+            set "key=%%A"
+            set "value=%%B"
+            rem echo Key: !key!, Value: !value! (Section: !currentSection!)
+            set !key!=!value!
+        )
+    )
+)
+
 for /f "tokens=2 delims=[]" %%a in ('ver') do set Version=%%a
 for /f "tokens=1,2,3 delims=." %%a in ("%Version%") do (
     set Major=%%a
@@ -73,7 +111,9 @@ for /f "tokens=2 delims==" %%I in ('wmic os get freephysicalmemory /value') do s
 for /f "tokens=2 delims==" %%I in ('wmic os get totalvisiblememorysize /value') do set TotalMemory=%%I
 set /a FreeMemory=FreeMemory/1048576
 set /a TotalMemory=TotalMemory/1048576
-
+if not %thm%==default (
+    goto handlelogo
+)
 rem debug
 ::set Major=6
 ::set ServicePack=1
@@ -128,10 +168,11 @@ set str=%str:"=%
 <NUL set /p dummy=%esc%[%1m%str%%esc%[0m
 exit /b
 
+:: built in ascii art
 :ver6Ascii
 rem Windows 7 and below ASCII art
 rem this assumes a non-color terminal
-echo          ..nnl!^|^|^|^|lk..                       %username%@%computername%
+echo          ..nnl!^|^|^|^|lk..                   %username%@%computername%
 echo        .MMMMMMMMMMMMMMl  ._             _     ----------------
 echo        LMMMMMMMMMMMMMMM  MMMm-..  ..-mMIl     OS: %OSInfo%
 echo       .MMMMMMMMMMMMMMM  :MMMMMMMMMMMMMMP      Shell: %ShellInfo%
@@ -232,5 +273,51 @@ exit /b
 
 :update
 echo Updating nfetch to %nfetchCurMajor%.%nfetchCurMinor%.%nfetchCurBugfix%
-curl -L nfetch.pages.dev/payload.bat > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
-C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
+curl -L nfetch.pages.dev/installer.bat > C:\Users\%username%\AppData\Roaming\nfetch\installer.bat
+C:\Users\%username%\AppData\Roaming\nfetch\installer.bat
+
+:handlelogo
+::echo Non-default logo, using logo from %thm%
+:: your system appears to have a particle accelerator installed
+set CONFIG_FILE=%thm%
+if exist %thm% (
+
+
+:: Read the config file line by line
+for /f "tokens=1,* delims=:" %%A in ('type "%CONFIG_FILE%"') do (
+    set "key=%%A"
+    set "value=%%B"
+
+    :: Remove leading spaces from the value
+    set "value=!value:~1!"
+    set !key!=!value!
+)
+)
+if %DISPLAYOS%==1 (
+    call :echoColorN %COLOROS% "%FORMATOS%"
+    call :echoColor 37 "%OSInfo%"
+)
+if %DISPLAYSHELL%==1 (
+    call :echoColorN %COLORSHELL% "%FORMATSHELL%"
+    call :echoColor 37 "%ShellInfo%"
+)
+if %DISPLAYRESOLUTION%==1 (
+    call :echoColorN %COLORRESOLUTION% "%FORMATRESOLUTION%"
+    call :echoColor 37 "%Resolution%"
+)
+if %DISPLAYCPU%==1 (
+    call :echoColorN %COLORCPU% "%FORMATCPU%"
+    call :echoColor 37 "%CPUInfo%"
+)
+if %DISPLAYGPU%==1 (
+    call :echoColorN %COLORGPU% "%FORMATGPU%"
+    call :echoColor 37 "%GPUInfo%"
+)
+if %DISPLAYFREEMEMORY%==1 (
+    call :echoColorN %COLORFREEMEMORY% "%FORMATFREEMEMORY%"
+    call :echoColor 37 "%FreeMemory% GB"
+)
+if %DISPLAYTOTALMEMORY%==1 (
+    call :echoColorN %COLORTOTALMEMORY% "%FORMATTOTALMEMORY%"
+    call :echoColor 37 "%TotalMemory% GB"
+)
