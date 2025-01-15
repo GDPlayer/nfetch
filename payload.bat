@@ -279,8 +279,8 @@ C:\Users\%username%\AppData\Roaming\nfetch\installer.bat
 :handlelogo
 ::echo Non-default logo, using logo from %thm%
 :: your system appears to have a particle accelerator installed
-set CONFIG_FILE=%thm%
-if exist %thm% (
+set CONFIG_FILE=C:\Users\%username%\AppData\Roaming\nfetch\%thm%
+if exist C:\Users\%username%\AppData\Roaming\nfetch\%thm% (
 
 
 :: Read the config file line by line
