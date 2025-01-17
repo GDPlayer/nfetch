@@ -1,0 +1,52 @@
+COLORLOGO:Cyan
+DISPLAYOS:1
+DISPLAYSHELL:1
+DISPLAYRESOLUTION:1
+DISPLAYCPU:1
+DISPLAYGPU:1
+DISPLAYFREEMEMORY:1
+DISPLAYTOTALMEMORY:1
+DISPLAYCOLORBOXES:1
+DISPLAYHOSTANDUSER:1
+DISPLAYSEPERATOR:1
+PADDING:-1
+HEIGHTOFFSET:2
+
+FORMATOS:"OS: "
+FORMATSHELL:"Shell: "
+FORMATRESOLUTION:"Resolution: "
+FORMATCPU:"CPU: "
+FORMATGPU:"GPU: "
+FORMATFREEMEMORY:"Free Memory: "
+FORMATTOTALMEMORY:"Total Memory: "
+FORMATSEPERATOR:"--------"
+
+COLOROS: Cyan
+COLORSHELL: Cyan
+COLORRESOLUTION: Cyan
+COLORCPU: Cyan
+COLORGPU: Cyan
+COLORFREEMEMORY: Cyan
+COLORTOTALMEMORY: Cyan
+WHITE: White
+
+LOGO:
+LOGO:                                  ..,
+LOGO:                      ....,,:;+ccllll
+LOGO:        ...,,+:;  cllllllllllllllllll
+LOGO:  ,cclllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  llllllllllllll  lllllllllllllllllll
+LOGO:  `'ccllllllllll  lllllllllllllllllll
+LOGO:         `'^^*::  :ccllllllllllllllll
+LOGO:                        ````''^*::cll
+LOGO:                                   ``

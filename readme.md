@@ -10,7 +10,7 @@ or try it out using `curl -L nfetch.pages.dev | cmd`
 
 ## website
 
-over [here](https://nfetch.pages.dev)
+~~over [here](https://nfetch.pages.dev)~~ nvm
 
 ## what
 
