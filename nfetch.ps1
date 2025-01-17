@@ -1,4 +1,4 @@
-$isDev = $true
+$isDev = $false
 if ($PSVersionTable.PSEdition -eq "Desktop") {
     Write-Host "update to core to use nfetch"
     exit
