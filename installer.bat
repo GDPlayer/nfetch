@@ -22,7 +22,7 @@ type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch
 type %TEMP%\win10.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\win10.nfetch
 echo Getting nfetch.ps1
 curl -L nfetch.pages.dev/nfetch.ps1 > %TEMP%\nfetch.ps1
-type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.ps1
+type %TEMP%\nfetch.ps1 | more /p > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.ps1
 
 if %ISUPDATE%==0 (
     echo Updating PATH...
