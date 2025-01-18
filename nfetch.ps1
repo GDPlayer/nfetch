@@ -40,6 +40,11 @@ if ($isDev) {
 }
 if ($thm -eq "default") {
     $thm = "win10"
+    if ($isDev) {
+        $themepath = "$PSScriptRoot\$thm.nfetch"
+    } else {
+        $themepath = "$env:USERPROFILE\AppData\Roaming\nfetch\$thm.nfetch"
+    }
 } else {
     if (!(Test-Path $themepath)) {
         Write-Host "Theme not found, check your configuration?"
