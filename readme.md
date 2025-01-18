@@ -19,3 +19,7 @@ i dont know
 ## why
 
 idk
+
+## showcase 
+![](showcase.png)
+![](showcase2.png)
