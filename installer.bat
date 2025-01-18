@@ -19,9 +19,10 @@ echo Getting themes
 curl -L nfetch.pages.dev/sample.nfetch > %TEMP%\sample.nfetch
 curl -L nfetch.pages.dev/win10.nfetch > %TEMP%\win10.nfetch
 type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\sample.nfetch
-type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\win10.nfetch
+type %TEMP%\win10.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\win10.nfetch
 echo Getting nfetch.ps1
 curl -L nfetch.pages.dev/nfetch.ps1 > %TEMP%\nfetch.ps1
+type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.ps1
 
 if %ISUPDATE%==0 (
     echo Updating PATH...
