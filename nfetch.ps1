@@ -33,6 +33,11 @@ Get-Content $INIFile | ForEach-Object {
         }
     }
 }
+if ($isDev) {
+    $themepath = "$PSScriptRoot\$thm.nfetch"
+} else {
+    $themepath = "$env:USERPROFILE\AppData\Roaming\nfetch\$thm.nfetch"
+}
 if ($thm -eq "default") {
     $thm = "win10"
 } else {
@@ -43,11 +48,7 @@ if ($thm -eq "default") {
         exit
     }
 }
-if ($isDev) {
-    $themepath = "$PSScriptRoot\$thm.nfetch"
-} else {
-    $themepath = "$env:USERPROFILE\AppData\Roaming\nfetch\$thm.nfetch"
-}
+
 # Get Windows version
 $OSVersion = [System.Environment]::OSVersion.Version.ToString()
 
