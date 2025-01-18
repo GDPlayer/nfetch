@@ -79,8 +79,8 @@ $CPUInfo = (Get-CimInstance -Class Win32_Processor).Name
 $res = [System.Windows.Forms.SystemInformation]::PrimaryMonitorSize
 $Resolution = "$($res.Width)x$($res.Height)"
 $GPUInfo = (Get-CimInstance -Class Win32_VideoController).Name[0]
-$FreeMemory = (Get-CimInstance -Class Win32_OperatingSystem).FreePhysicalMemory/1MB
-$TotalMemory = (Get-CimInstance -Class Win32_OperatingSystem).TotalVisibleMemorySize/1MB
+$FreeMemory = [math]::Round((Get-CimInstance -Class Win32_OperatingSystem).FreePhysicalMemory/1MB, 0)
+$TotalMemory = [math]::Round((Get-CimInstance -Class Win32_OperatingSystem).TotalVisibleMemorySize/1MB, 0)
 
 function echoColor($text, $color) {
     if ($UseColor -eq 1) {
