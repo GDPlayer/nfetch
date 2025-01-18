@@ -31,8 +31,8 @@ if %updateNOW%==1 (
 rem rewrite in powershell moment
 :: load nfetch.ps1
 pwsh -NoProfile -ExecutionPolicy Bypass -File "%~dp0nfetch.ps1"
-
+exit
 :update
 echo Updating nfetch to %nfetchCurMajor%.%nfetchCurMinor%.%nfetchCurBugfix%
-curl -L nfetch.pages.dev/installer.bat > C:\Users\%username%\AppData\Roaming\nfetch\installer.bat
-C:\Users\%username%\AppData\Roaming\nfetch\installer.bat
+curl -L nfetch.pages.dev/installer.bat > %TEMP%\installer.bat
+%TEMP%\installer.bat

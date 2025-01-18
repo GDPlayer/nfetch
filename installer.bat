@@ -7,14 +7,20 @@ if not exist C:\Users\%username%\AppData\Roaming\nfetch (
     echo Existing install, assuming update
     set ISUPDATE=1
 )
+echo Getting payload.bat
 curl -L nfetch.pages.dev/payload.bat > %TEMP%\payload.bat
+echo Fixing payload.bat
 type %TEMP%\payload.bat | more /p > C:\Users\%username%\AppData\Roaming\nfetch\nfetch.bat
-curl -L nfetch.pages.dev/config.ini > %TEMP%\config.ini
-type %TEMP%\config.ini | more /p > C:\Users\%username%\AppData\Roaming\nfetch\config.ini
-mkdir C:\Users\%username%\AppData\Roaming\nfetch\themes\sample
-curl -L nfetch.pages.dev/sample.nfetch > C:\Users\%username%\AppData\Roaming\nfetch\sample.nfetch
-curl -L nfetch.pages.dev/win10.nfetch > C:\Users\%username%\AppData\Roaming\nfetch\win10.nfetch
+::echo Getting configuration
+::curl -L nfetch.pages.dev/config.ini > %TEMP%\config.ini
+::type %TEMP%\config.ini | more /p > C:\Users\%username%\AppData\Roaming\nfetch\config.ini
+::mkdir C:\Users\%username%\AppData\Roaming\nfetch\themes\sample
+echo Getting themes
+curl -L nfetch.pages.dev/sample.nfetch > %TEMP%\sample.nfetch
+curl -L nfetch.pages.dev/win10.nfetch > %TEMP%\win10.nfetch
 type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\sample.nfetch
+type %TEMP%\sample.nfetch | more /p > C:\Users\%username%\AppData\Roaming\nfetch\win10.nfetch
+echo Getting nfetch.ps1
 curl -L nfetch.pages.dev/nfetch.ps1 > %TEMP%\nfetch.ps1
 
 if %ISUPDATE%==0 (
