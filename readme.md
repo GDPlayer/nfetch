@@ -10,7 +10,7 @@ run installer.bat from the repo
 
 ## website
 
-~~over [here](https://nfetch.pages.dev)~~ nvm
+over [here](https://nfetch.pages.dev)
 
 ## what
 
